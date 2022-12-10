@@ -26,6 +26,7 @@
 I am proud to offer this resource for free, but if you wish to give some appreciation:
 
 - [Tweet me @quii](https://twitter.com/quii)
+- <a rel="me" href="https://mastodon.cloud/@quii">Mastodon</a>
 - [Buy me a coffee :coffee:](https://www.buymeacoffee.com/quii)
 - [Sponsor me on GitHub](https://github.com/sponsors/quii)
 
@@ -80,6 +81,13 @@ By the end of this, you should have a strong grasp as to how to iteratively writ
 * [Command line & project structure](command-line.md) - Support multiple applications from one code base and read input from command line.
 * [Time](time.md) - using the `time` package to schedule activities.
 * [WebSockets](websockets.md) - learn how to write and test a server that uses WebSockets.
+
+### Testing fundamentals
+
+Covering other subjects around testing.
+
+* [Introduction to acceptance tests](intro-to-acceptance-tests.md) - Learn how to write acceptance tests for your code, with a real-world example for gracefully shutting down a HTTP server
+* [Scaling acceptance tests](scaling-acceptance-tests.md) - Learn techniques to manage the complexity of writing acceptance tests for non-trivial systems.
 
 ### Questions and answers
 

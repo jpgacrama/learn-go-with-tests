@@ -21,7 +21,7 @@ To run it type `go run hello.go`.
 
 ## How it works
 
-When you write a program in Go you will have a `main` package defined with a `main` func inside it. Packages are ways of grouping up related Go code together.
+When you write a program in Go, you will have a `main` package defined with a `main` func inside it. Packages are ways of grouping up related Go code together.
 
 The `func` keyword is how you define a function with a name and a body.
 
@@ -275,31 +275,33 @@ We can and should refactor our tests.
 
 ```go
 func TestHello(t *testing.T) {
-	assertCorrectMessage := func(t testing.TB, got, want string) {
-		t.Helper()
-		if got != want {
-			t.Errorf("got %q want %q", got, want)
-		}
-	}
-
 	t.Run("saying hello to people", func(t *testing.T) {
 		got := Hello("Chris")
 		want := "Hello, Chris"
 		assertCorrectMessage(t, got, want)
 	})
-	t.Run("empty string defaults to 'World'", func(t *testing.T) {
+
+	t.Run("empty string defaults to 'world'", func(t *testing.T) {
 		got := Hello("")
 		want := "Hello, World"
 		assertCorrectMessage(t, got, want)
 	})
+
+}
+
+func assertCorrectMessage(t testing.TB, got, want string) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got %q want %q", got, want)
+	}
 }
 ```
 
 What have we done here?
 
-We've refactored our assertion into a function. This reduces duplication and improves readability of our tests. In Go you can declare functions inside other functions and assign them to variables. You can then call them, just like normal functions. We need to pass in `t *testing.T` so that we can tell the test code to fail when we need to.
+We've refactored our assertion into a new function. This reduces duplication and improves readability of our tests. We need to pass in `t *testing.T` so that we can tell the test code to fail when we need to.
 
-For helper functions, it's a good idea to accept a `testing.TB` which is an interface that `*testing.T` and `*testing.B` both satisfy, so you can call helper functions from a test, or a benchmark.
+For helper functions, it's a good idea to accept a `testing.TB` which is an interface that `*testing.T` and `*testing.B` both satisfy, so you can call helper functions from a test, or a benchmark (don't worry if words like "interface" mean nothing to you right now, it will be covered later).
 
 `t.Helper()` is needed to tell the test suite that this method is a helper. By doing this when it fails the line number reported will be in our _function call_ rather than inside our test helper. This will help other developers track down problems easier. If you still don't understand, comment it out, make a test fail and observe the test output. Comments in Go are a great way to add additional information to your code, or in this case, a quick way to tell the compiler to ignore a line. You can comment out the `t.Helper()` code by adding two forward slashes `//` at the beginning of the line. You should see that line turn grey or change to another color than the rest of your code to indicate it's now commented out.
 
@@ -511,7 +513,7 @@ A few new concepts:
     * You can return whatever it's set to by just calling `return` rather than `return prefix`.
   * This will display in the Go Doc for your function so it can make the intent of your code clearer.
 * `default` in the switch case will be branched to if none of the other `case` statements match.
-* The function name starts with a lowercase letter. In Go public functions start with a capital letter and private ones start with a lowercase. We don't want the internals of our algorithm to be exposed to the world, so we made this function private.
+* The function name starts with a lowercase letter. In Go, public functions start with a capital letter and private ones start with a lowercase. We don't want the internals of our algorithm to be exposed to the world, so we made this function private.
 
 ## Wrapping up
 
